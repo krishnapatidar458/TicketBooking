@@ -1,6 +1,7 @@
 package org.ticket;
 
 import org.ticket.entities.User;
+import org.ticket.services.TrainService;
 import org.ticket.services.UserBookingService;
 import org.ticket.util.UserServiceUtil;
 
@@ -15,8 +16,10 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int option = 0;
         UserBookingService userBookingService;
+        TrainService trainService;
         try{
             userBookingService = new UserBookingService();
+            trainService = new TrainService();
         } catch (IOException e) {
             System.out.println("Something went Wrong"+e);
             return;
@@ -68,7 +71,18 @@ public class Main {
                     userBookingService.fetchBooking();
                     break;
 
-
+                case 4:
+                    System.out.println("Enter Source Station");
+                    String source = sc.next();
+                    System.out.println("Enter Destination Station");
+                    String destination = sc.next();
+                    try {
+                        trainService.searchTrains(source, destination)
+                                .forEach(train -> System.out.println("Train ID: " + train.getTrainId() + ", Train No: " + train.getTrainNo()));
+                    } catch (IOException e) {
+                        System.out.println("Error fetching trains: " + e.getMessage());
+                    }
+                    break;
             }
 
         }

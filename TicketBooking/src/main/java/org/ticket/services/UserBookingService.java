@@ -8,8 +8,6 @@ import org.ticket.util.UserServiceUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +19,7 @@ public class UserBookingService {
 
     private List<User> userList;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private static final String USERS_PATH = "ticketBooking/TicketBooking/src/main/java/org/ticket/localDb/Users.json";
 
